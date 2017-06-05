@@ -70,6 +70,6 @@
     "zuul": "^1.9.0"
   },
   "scripts": {
-    "dev": "node bin/example-server.js"
+    "dev": "node bin/app-server.js"
   }
 }

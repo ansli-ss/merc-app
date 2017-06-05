@@ -4,11 +4,8 @@ var path = require('path');
 var indexhtmlify = require('indexhtmlify');
 var browserify = require('browserify');
 
-var browserifyEditor = require('./browserify-editor');
-
-var examplesDir = path.join(__dirname, '..', 'examples');
+var examplesDir = path.join(__dirname, '..', 'src');
 var examplesTasks = [
-    //browserifyTask('mvc'),
     browserifyTask('app')
 ];
 
@@ -37,22 +34,6 @@ function browserifyTask(folder) {
     }
 }
 
-function browserifyEditorTask(file) {
-    var task = {
-        src: path.join(examplesDir, file + '.js'),
-        dest: path.join(examplesDir, file + '.html'),
-        type: 'browserify-editor',
-        name: file,
-        createStream: createStream
-    };
-
-    return task;
-
-    function createStream() {
-        return browserifyEditor(task.src)
-            .pipe(indexhtmlify({}));
-    }
-}
 
 function browserifyBundle(source) {
     var b = browserify();

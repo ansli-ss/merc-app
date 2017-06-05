@@ -1,16 +1,16 @@
 'use strict';
 
-var hg = require('../../index');
-var h = require('../../index').h;
+var hg = require('../../../index');
+var h = require('../../../index').h;
 
-var styles = require('./styles.js');
+var styles = require('../styles/styles.js');
 
-var rafListen = require('./lib/raf-listen.js');
+var rafListen = require('../../lib/raf-listen.js');
 var localStorage = window.localStorage;
 
 var TodoApp = require('./todo-app.js');
 
-var Router = require('../lib/router/');
+var Router = require('../../lib/router/index');
 
 var routeView = Router.render;
 

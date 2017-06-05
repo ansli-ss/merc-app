@@ -1,8 +1,8 @@
 'use strict';
 
 var validEmail = require('valid-email');
-var hg = require('../../index.js');
-var WeakmapEvent = require('../lib/weakmap-event.js');
+var hg = require('../../../index.js');
+var WeakmapEvent = require('../../lib/weakmap-event.js');
 
 var onSuccess = WeakmapEvent();
 

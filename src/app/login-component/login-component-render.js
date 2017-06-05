@@ -1,8 +1,8 @@
 'use strict';
 
-var hg = require('../../index.js');
-var h = require('../../index.js').h;
-var styles = require('./styles.js');
+var hg = require('../../../index.js');
+var h = require('../../../index.js').h;
+var styles = require('../styles/styles.js');
 
 module.exports = render;
 

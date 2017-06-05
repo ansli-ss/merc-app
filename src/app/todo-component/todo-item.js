@@ -1,11 +1,11 @@
 'use strict';
 
-var hg = require('../../index.js');
-var h = require('../../index.js').h;
+var hg = require('../../../index.js');
+var h = require('../../../index.js').h;
 var cuid = require('cuid');
-var WeakmapEvent = require('../lib/weakmap-event.js');
+var WeakmapEvent = require('../../lib/weakmap-event.js');
 
-var FocusHook = require('../lib/focus-hook.js');
+var FocusHook = require('../../lib/focus-hook.js');
 
 var DestroyEvent = WeakmapEvent();
 var ESCAPE = 27;

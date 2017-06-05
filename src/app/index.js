@@ -3,10 +3,10 @@
 var hg = require('../../index');
 var h = require('../../index').h;
 
-var styles = require('./styles.js');
+var styles = require('./styles/styles.js');
 
-var LoginComponent = require('./login-component.js');
-var TodoComponent = require('./todo-component.js')
+var LoginComponent = require('./login-component/login-component.js');
+var TodoComponent = require('./todo-component/todo-component.js')
 var document = require('global/document');
 var window = require('global/window');
 
@@ -52,7 +52,7 @@ App.render = function render(state, route) {
         }),
         h('link', {
             rel: 'stylesheet',
-            href: '/mercury/examples/app/style.css'
+            href: '/mercury/src/app/styles/style.css'
         }),
         h('header.main-header', {}, [
             h('a',{

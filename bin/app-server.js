@@ -7,7 +7,7 @@ var path = require('path');
 var st = require('st');
 var logger = require('console');
 
-var tasks = require('./example-tasks.js');
+var tasks = require('./app-task.js');
 var tasksHash = tasks.reduce(function buildHash(acc, task) {
     acc[task.name] = task;
     return acc;
@@ -34,26 +34,6 @@ var handler = function exampleHandler(req, res, opts) {
     stream.pipe(res);
 };
 
-var buildList = function buildList(items) {
-    var i = 0;
-    var l = items.length;
-    var list = '<ol class="rounded-list">';
-    var name;
-
-    if (!items || !items.length) {
-        return ''; // return here if there are no items to render
-    }
-
-    for (; i < l; i++) {
-        name = items[i].name;
-        list += '<li><a href="/' +
-            encodeURI(name) + '">' +
-            name + '</a></li>'; // make a list item element
-    }
-    list += '</ol>';
-
-    return list;
-};
 
 var mainView = function (loginHref) {
     var welcomeBlock = '<div>Welcome! Click <a href="' + loginHref + '">here</a> to login!</div>';
@@ -62,13 +42,13 @@ var mainView = function (loginHref) {
 
 // Routes handlers
 router.set('/', function index(req, res) {
-    var filename = path.dirname(__dirname) + '/examples/index.html';
+    var filename = path.dirname(__dirname) + '/src/index.html';
     var buf = fs.readFileSync(filename, 'utf8');
 
     res.setHeader('Content-Type', 'text/html');
 
-    //buf = buf.replace('{{examples}}', buildList(tasks));
-    buf = buf.replace('{{examples}}', mainView('/app'));
+    //buf = buf.replace('{{src}}', buildList(tasks));
+    buf = buf.replace('{{src}}', mainView('/app'));
     res.end(buf);
 });
 router.set('/:name', handler);
