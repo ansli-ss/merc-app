@@ -7,7 +7,6 @@ module.exports = render;
 function render(defn, args) {
 
     if (args.base) {
-        console.log('check');
         defn = Object.keys(defn)
             .reduce(function applyBase(acc, str) {
                 acc[args.base + str] = defn[str];

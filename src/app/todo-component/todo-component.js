@@ -48,12 +48,11 @@ function link(uri, text, isSelected) {
     ]);
 }
 
-function menu(route) {
-    console.log('route: ', route);
+function menu(state) {
     return h('ul', [
-        link(TABLE1_URI, 'List 1', route === TABLE1_URI),
-        link(TABLE2_URI, 'List 2', route === TABLE2_URI),
-        link(TABLE3_URI, 'List 3', route === TABLE3_URI)
+        link(TABLE1_URI, 'List 1', state.route === TABLE1_URI),
+        link(TABLE2_URI, 'List 2', state.route === TABLE2_URI),
+        link(TABLE3_URI, 'List 3', state.route === TABLE3_URI)
     ])
 }
 function renderBase() {
@@ -67,14 +66,14 @@ function renderTable(state, listName) {
     ]);
 }
 
-TodoComponent.render = function(state, route) {
+TodoComponent.render = function(state) {
     return h('div', {
         //  className: styles.mainContent.className
     }, [
         h('aside.sidebar', {
             //  className: styles.sidebar.className
         }, [
-            menu(route)
+            menu(state)
         ]),
         h('main', {
             //    className: styles.main.className

@@ -9,7 +9,7 @@ var LoginComponent = require('./login-component/login-component.js');
 var TodoComponent = require('./todo-component/todo-component.js')
 var document = require('global/document');
 var window = require('global/window');
-
+var Router = require('../lib/router/index');
 var TimeTravel = require('../../time-travel.js');
 
 var RCSS = require('rcss');
@@ -19,6 +19,7 @@ function App() {
     var state = hg.state({
         message: hg.value(''),
         loginDone: hg.value(false),
+        route: Router(),
         loginComponent: LoginComponent(),
         todoComponent: TodoComponent()
     });
