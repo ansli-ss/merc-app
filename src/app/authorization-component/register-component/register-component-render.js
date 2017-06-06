@@ -30,10 +30,7 @@ function Register(state, user) {
         return state.passwordError.set('Password too small');
     }
 
-    onSuccess.broadcast(state, {
-        type: 'register',
-        user: user
-    });
+    onSuccess.broadcast(state);
 }
 
 Register.render = function (state) {

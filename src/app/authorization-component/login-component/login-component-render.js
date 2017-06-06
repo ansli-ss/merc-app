@@ -5,6 +5,7 @@ var h = require('../../../../index.js').h;
 var styles = require('../../styles/styles.js');
 
 var validEmail = require('valid-email');
+
 var WeakmapEvent = require('../../../lib/weakmap-event.js');
 var onSuccess = WeakmapEvent();
 Login.onSuccess = onSuccess.listen;
@@ -14,7 +15,6 @@ var resetErrors = require('../../partials/reset-errors.js');
 
 module.exports = Login;
 
-
 function Login(state, user) {
     resetErrors(state);
     var email = user.email;
@@ -23,10 +23,7 @@ function Login(state, user) {
         return state.emailError.set('Invalid email');
     }
 
-    onSuccess.broadcast(state, {
-        type: 'login',
-        user: user
-    });
+    onSuccess.broadcast(state);
 }
 
 Login.render = function (state) {

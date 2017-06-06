@@ -25,23 +25,13 @@ function App() {
         todoComponent: TodoComponent()
     });
 
-    AuthorizationComponent.onSuccess(state.authorizationComponent, onSuccess);
+    AuthorizationComponent.onSuccessLogin(state.authorizationComponent, onSuccess);
+    AuthorizationComponent.onSuccessRegister(state.authorizationComponent, onSuccess);
 
     return state;
 
-    function onSuccess(opts) {
-        console.log('on success');
+    function onSuccess() {
         state.authDone.set(true);
-
-        // if (opts.type === 'login') {
-        //     state.message.set('Congrats login' +
-        //         'user: ' + opts.user.email + ' password: ' +
-        //         opts.user.password);
-        // } else if (opts.type === 'register') {
-        //     state.message.set('Congrats register' +
-        //         'user: ' + opts.user.email + ' password: ' +
-        //         opts.user.password);
-        // }
     }
 
 }

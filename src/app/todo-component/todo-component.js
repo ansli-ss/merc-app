@@ -83,10 +83,10 @@ TodoComponent.render = function(state) {
             }
         }, [
             routeView({
-                '/app': renderBase.bind(null),
-                '/app/table1': renderTable.bind(null, state, 'List 1'),
-                '/app/table2': renderTable.bind(null, state, 'List 2'),
-                '/app/table3': renderTable.bind(null, state, 'List 3')
+                '/app': renderBase.bind(this),
+                '/app/table1': renderTable.bind(this, state, 'List 1'),
+                '/app/table2': renderTable.bind(this, state, 'List 2'),
+                '/app/table3': renderTable.bind(this, state, 'List 3')
             }, state)
         ])
     ]);

@@ -5,12 +5,9 @@ var hg = require('../../../index.js');
 var Login = require('./login-component/login-component-render.js');
 var Register = require('./register-component/register-component-render.js');
 
-// AuthorizationComponent.onSuccess = function(state) {
-//     return state.registerMode ?
-//         Register.onSuccess :
-//         Login.onSuccess;
-// };
-AuthorizationComponent.onSuccess = Login.onSuccess;
+AuthorizationComponent.onSuccessLogin = Login.onSuccess;
+AuthorizationComponent.onSuccessRegister = Register.onSuccess;
+
 module.exports = AuthorizationComponent;
 
 function AuthorizationComponent() {
@@ -34,11 +31,4 @@ AuthorizationComponent.render = function (state) {
     return state.registerMode ?
         Register.render(state) :
         Login.render(state);
-    // if (state.registerMode) {
-    //     AuthorizationComponent.onSuccess = Register.onSuccess;
-    //     return Register.render(state);
-    // } else {
-    //     AuthorizationComponent.onSuccess = Login.onSuccess;
-    //     return Login.render(state);
-    // }
 };
