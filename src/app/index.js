@@ -5,8 +5,9 @@ var h = require('../../index').h;
 
 var styles = require('./styles/styles.js');
 
-var LoginComponent = require('./login-component/login-component.js');
-var TodoComponent = require('./todo-component/todo-component.js')
+var AuthorizationComponent = require('./authorization-component/authorization.js');
+var TodoComponent = require('./todo-component/todo-component.js');
+
 var document = require('global/document');
 var window = require('global/window');
 var Router = require('../lib/router/index');
@@ -18,28 +19,29 @@ RCSS.injectAll();
 function App() {
     var state = hg.state({
         message: hg.value(''),
-        loginDone: hg.value(false),
+        authDone: hg.value(false),
         route: Router(),
-        loginComponent: LoginComponent(),
+        authorizationComponent: AuthorizationComponent(),
         todoComponent: TodoComponent()
     });
 
-    LoginComponent.onSuccess(state.loginComponent, onSuccess);
+    AuthorizationComponent.onSuccess(state.authorizationComponent, onSuccess);
 
     return state;
 
     function onSuccess(opts) {
-        state.loginDone.set(true);
+        console.log('on success');
+        state.authDone.set(true);
 
-        if (opts.type === 'login') {
-            state.message.set('Congrats login' +
-                'user: ' + opts.user.email + ' password: ' +
-                opts.user.password);
-        } else if (opts.type === 'register') {
-            state.message.set('Congrats register' +
-                'user: ' + opts.user.email + ' password: ' +
-                opts.user.password);
-        }
+        // if (opts.type === 'login') {
+        //     state.message.set('Congrats login' +
+        //         'user: ' + opts.user.email + ' password: ' +
+        //         opts.user.password);
+        // } else if (opts.type === 'register') {
+        //     state.message.set('Congrats register' +
+        //         'user: ' + opts.user.email + ' password: ' +
+        //         opts.user.password);
+        // }
     }
 
 }
@@ -65,9 +67,9 @@ App.render = function render(state, route) {
                 })
             ])
         ]),
-        state.loginDone ?
+        state.authDone ?
             TodoComponent.render(state.todoComponent, route) :
-            LoginComponent.render(state.loginComponent),
+            AuthorizationComponent.render(state.authorizationComponent),
         h('footer', {
             //  className: styles.footer.className
         })

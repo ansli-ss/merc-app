@@ -748,4 +748,5 @@ hr {
     color: #888;
     font-size: 15px;
     cursor: pointer;
+    overflow: hidden;
 }
