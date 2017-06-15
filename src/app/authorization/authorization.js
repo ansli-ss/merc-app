@@ -2,8 +2,8 @@
 
 var hg = require('../../../index.js');
 
-var Login = require('./login-component/login-component-render.js');
-var Register = require('./register-component/register-component-render.js');
+var Login = require('./login/login-render.js');
+var Register = require('./register/register-render.js');
 
 AuthorizationComponent.onSuccessLogin = Login.onSuccess;
 AuthorizationComponent.onSuccessRegister = Register.onSuccess;

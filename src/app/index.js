@@ -5,24 +5,26 @@ var h = require('../../index').h;
 
 var styles = require('./styles/styles.js');
 
-var AuthorizationComponent = require('./authorization-component/authorization.js');
-var TodoComponent = require('./todo-component/todo-component.js');
+var AuthorizationComponent = require('./authorization/authorization.js');
+var TodoComponent = require('./todo/todo.js');
 
 var document = require('global/document');
 var window = require('global/window');
 var Router = require('../lib/router/index');
 var TimeTravel = require('../../time-travel.js');
 
+var partial = require("vdom-thunk");
+
 var RCSS = require('rcss');
 RCSS.injectAll();
 
 function App() {
     var state = hg.state({
-        message: hg.value(''),
-        authDone: hg.value(false),
+        authorizationDone: hg.value(false),
         route: Router(),
         authorizationComponent: AuthorizationComponent(),
-        todoComponent: TodoComponent()
+        todoComponent: TodoComponent('todos-mercury@11'),
+        todoComponent2: TodoComponent('todos-mercury@112')
     });
 
     AuthorizationComponent.onSuccessLogin(state.authorizationComponent, onSuccess);
@@ -31,9 +33,15 @@ function App() {
     return state;
 
     function onSuccess() {
-        state.authDone.set(true);
+        state.authorizationDone.set(true);
     }
 
+}
+
+function renderMainView(state, route) {
+    return state.authorizationDone ?
+        TodoComponent.render(state.todoComponent, state.todoComponent2,  route) :
+        AuthorizationComponent.render(state.authorizationComponent);
 }
 
 App.render = function render(state, route) {
@@ -47,25 +55,28 @@ App.render = function render(state, route) {
             rel: 'stylesheet',
             href: '/mercury/src/app/styles/style.css'
         }),
-        h('header.main-header', {}, [
-            h('a',{
-              href: '/app',
-              className: 'logo'
-            }, [
-                h('i', {
-                    className: 'fa fa-bars'
-                })
-            ])
-        ]),
-        state.authDone ?
-            TodoComponent.render(state.todoComponent, route) :
-            AuthorizationComponent.render(state.authorizationComponent),
-        h('footer', {
-            //  className: styles.footer.className
-        })
+        partial(header),
+        renderMainView(state, route),
+        partial(footer)
     ]);
 };
 
+function header() {
+    return h('header.main-header', {}, [
+        h('a',{
+            href: '/app',
+            className: 'logo'
+        }, [
+            h('i', {
+                className: 'fa fa-bars'
+            })
+        ])
+    ]);
+}
+
+function footer() {
+    return h('footer.main-footer', {});
+}
 
 var app = window.app = App();
 var history = TimeTravel(app);
