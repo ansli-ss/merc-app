@@ -10,18 +10,14 @@ var TodoComponent = require('./todo/todo.js');
 
 var document = require('global/document');
 var window = require('global/window');
-var Router = require('../lib/router/index');
+
 var TimeTravel = require('../../time-travel.js');
 
 var partial = require("vdom-thunk");
 
-var RCSS = require('rcss');
-RCSS.injectAll();
-
 function App() {
     var state = hg.state({
         authorizationDone: hg.value(false),
-        route: Router(),
         authorizationComponent: AuthorizationComponent(),
         todoComponent: TodoComponent('todos-mercury@11'),
         todoComponent2: TodoComponent('todos-mercury@112')
@@ -35,7 +31,6 @@ function App() {
     function onSuccess() {
         state.authorizationDone.set(true);
     }
-
 }
 
 function renderMainView(state, route) {

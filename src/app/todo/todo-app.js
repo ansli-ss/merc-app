@@ -81,7 +81,7 @@ TodoApp.render = function render(state, listName) {
         h('h1', {}, listName),
         h('section#todoapp.todoapp', [
             hg.partial(mainSection,
-                state.todos, state.route, state.channels),
+                state.todos, state.channels),
             hg.partial(header, state.field, state.channels)
         ])
     ]);
