@@ -46,8 +46,7 @@ router.set('/', function index(req, res) {
     var buf = fs.readFileSync(filename, 'utf8');
 
     res.setHeader('Content-Type', 'text/html');
-
-    //buf = buf.replace('{{src}}', buildList(tasks));
+    
     buf = buf.replace('{{src}}', mainView('/app'));
     res.end(buf);
 });
