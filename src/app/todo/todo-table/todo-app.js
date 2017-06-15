@@ -1,11 +1,11 @@
 'use strict';
 
-var hg = require('../../../index.js');
-var h = require('../../../index.js').h;
+var hg = require('../../../../index.js');
+var h = require('../../../../index.js').h;
 
 var document = require('global/document');
 
-var Router = require('../../lib/router/index');
+var Router = require('../../../lib/router/index');
 
 var TodoItem = require('./todo-item.js');
 

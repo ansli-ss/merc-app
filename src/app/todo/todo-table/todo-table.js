@@ -1,5 +1,5 @@
 
-var h = require('../../../index').h;
+var h = require('../../../../index').h;
 var TodoApp = require('./todo-app.js');
 
 module.exports = renderTable;

@@ -1,6 +1,6 @@
 
-var h = require('../../../index').h;
-var link = require('../partials/link.js');
+var h = require('../../../../index').h;
+var link = require('../../partials/link.js');
 
 var ROOT_URI = String(document.location.pathname);
 
