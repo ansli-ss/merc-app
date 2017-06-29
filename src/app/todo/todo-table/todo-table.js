@@ -4,8 +4,8 @@ var TodoApp = require('./todo-app.js');
 
 module.exports = renderTable;
 
-function renderTable(state, listName) {
+function renderTable(state, listState) {
     return h('div', {}, [
-        TodoApp.render(state, listName)
+        TodoApp.render(state, listState)
     ]);
 }

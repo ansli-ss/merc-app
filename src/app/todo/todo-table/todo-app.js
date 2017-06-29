@@ -8,6 +8,7 @@ var document = require('global/document');
 var Router = require('../../../lib/router/index');
 
 var TodoItem = require('./todo-item.js');
+var ListItem = require('../todo-list/todo-list-item.js');
 
 module.exports = TodoApp;
 // opts - initial state
@@ -21,6 +22,7 @@ function TodoApp(opts) {
         field: hg.struct({
             text: hg.value(opts.field && opts.field.text || '')
         }),
+        listName: hg.varhash(opts.listItems || {}, ListItem),
         channels: {
             setTodoField: setTodoField,
             add: add,
@@ -74,11 +76,11 @@ function destroy(state, opts) {
     state.todos.delete(opts.id);
 }
 
-TodoApp.render = function render(state, listName) {
+TodoApp.render = function render(state, listState) {
     return h('.todomvc-wrapper', {
         style: { visibility: 'hidden' }
     }, [
-        h('h1', {}, listName),
+        h('h1', {}, listState.title),
         h('section#todoapp.todoapp', [
             hg.partial(mainSection,
                 state.todos, state.channels),

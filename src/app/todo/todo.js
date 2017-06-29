@@ -12,11 +12,12 @@ var TodoApp = require('./todo-table/todo-app');
 var Router = require('../../lib/router/index');
 
 var routeView = Router.render;
-var link = require('../partials/link.js');
+
 var menu = require('./todo-list/todo-list.js');
 var renderTable = require('./todo-table/todo-table');
 
 module.exports = TodoComponent;
+
 
 function TodoComponent(localStorageName) {
     var storedState = localStorage.getItem(localStorageName);
@@ -38,10 +39,10 @@ function renderBase() {
     }, 'Welcome to ToDo list!');
 }
 
-TodoComponent.render = function(state, state2) {
+TodoComponent.render = function(state, state2, listState, listState2) {
     return h('div', {}, [
         h('aside.sidebar', {}, [
-            partial(menu,state)
+            partial(menu, state, state2, listState, listState2)
         ]),
         h('main', {
             style: {
@@ -51,8 +52,8 @@ TodoComponent.render = function(state, state2) {
         }, [
             routeView({
                 '/app': renderBase.bind(this),
-                '/app/table1': renderTable.bind(this, state, 'List 1'),
-                '/app/table2': renderTable.bind(this, state2, 'List 2'),
+                '/app/table1': renderTable.bind(this, state, listState),
+                '/app/table2': renderTable.bind(this, state2, listState2),
                 '/app/table3': renderTable.bind(this, state, 'List 3')
             }, state)
         ])

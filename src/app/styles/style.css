@@ -294,6 +294,27 @@ label[for='toggle-all'] {
     border-bottom: none;
     padding: 0;
 }
+.editing {
+    position: relative;
+}
+.list-edit {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.editing .list-edit {
+    display: block;
+    color: black;
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: uppercase;
+    height: 100%;
+    padding: 0 10px;
+    border: none;
+    width: 93%;
+}
 
 #todo-list li.editing .edit {
     display: block;

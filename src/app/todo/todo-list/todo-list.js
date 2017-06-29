@@ -1,6 +1,7 @@
 
 var h = require('../../../../index').h;
 var link = require('../../partials/link.js');
+var ListItem = require('./todo-list-item.js');
 
 var ROOT_URI = String(document.location.pathname);
 
@@ -10,10 +11,9 @@ var TABLE3_URI = ROOT_URI + '/table3';
 
 module.exports = menu;
 
-function menu(state) {
+function menu(state, state2, listState, listState2) {
     return h('ul', [
-        link(TABLE1_URI, 'List 1', state.route === TABLE1_URI),
-        link(TABLE2_URI, 'List 2', state.route === TABLE2_URI),
-        link(TABLE3_URI, 'List 3', state.route === TABLE3_URI)
-    ])
+        ListItem.render(state, listState, TABLE1_URI),
+        ListItem.render(state, listState2, TABLE2_URI)
+    ]);
 }

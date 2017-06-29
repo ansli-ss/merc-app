@@ -7,6 +7,7 @@ var styles = require('./styles/styles.js');
 
 var AuthorizationComponent = require('./authorization/authorization.js');
 var TodoComponent = require('./todo/todo.js');
+var ListItemsComponent = require('./todo/list-items.js');
 
 var document = require('global/document');
 var window = require('global/window');
@@ -20,7 +21,9 @@ function App() {
         authorizationDone: hg.value(false),
         authorizationComponent: AuthorizationComponent(),
         todoComponent: TodoComponent('todos-mercury@11'),
-        todoComponent2: TodoComponent('todos-mercury@112')
+        todoComponent2: TodoComponent('todos-mercury@112'),
+        listItemsComponent: ListItemsComponent('list-mercury@11'),
+        listItemsComponent2: ListItemsComponent('list-mercury@112')
     });
 
     AuthorizationComponent.onSuccessLogin(state.authorizationComponent, onSuccess);
@@ -33,9 +36,9 @@ function App() {
     }
 }
 
-function renderMainView(state, route) {
+function renderMainView(state) {
     return state.authorizationDone ?
-        TodoComponent.render(state.todoComponent, state.todoComponent2,  route) :
+        TodoComponent.render(state.todoComponent, state.todoComponent2, state.listItemsComponent, state.listItemsComponent2) :
         AuthorizationComponent.render(state.authorizationComponent);
 }
 
