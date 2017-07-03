@@ -20,10 +20,10 @@ function App() {
     var state = hg.state({
         authorizationDone: hg.value(false),
         authorizationComponent: AuthorizationComponent(),
-        todoComponent: TodoComponent('todos-mercury@11'),
-        todoComponent2: TodoComponent('todos-mercury@112'),
-        listItemsComponent: ListItemsComponent('list-mercury@11'),
-        listItemsComponent2: ListItemsComponent('list-mercury@112')
+        todoComponent: TodoComponent('test'),
+        todoComponent2: TodoComponent('test2'),
+        listItemsComponent: ListItemsComponent('test3'),
+        listItemsComponent2: ListItemsComponent('test4')
     });
 
     AuthorizationComponent.onSuccessLogin(state.authorizationComponent, onSuccess);
@@ -31,8 +31,14 @@ function App() {
 
     return state;
 
-    function onSuccess() {
+    function onSuccess(opts) {
         state.authorizationDone.set(true);
+        if (opts.type === 'login') {
+            state.todoComponent = TodoComponent(opts.user.email);
+            state.listItemsComponent = ListItemsComponent(opts.user.email + '1list');
+            state.todoComponent2 = TodoComponent(opts.user.email + '2');
+            state.listItemsComponent2 = ListItemsComponent(opts.user.email + '2list');
+        }
     }
 }
 

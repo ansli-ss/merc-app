@@ -23,7 +23,10 @@ function Login(state, user) {
         return state.emailError.set('Invalid email');
     }
 
-    onSuccess.broadcast(state);
+    onSuccess.broadcast(state, {
+        type: 'login',
+        user: user
+    });
 }
 
 Login.render = function (state) {
