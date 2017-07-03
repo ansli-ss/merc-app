@@ -19,11 +19,7 @@ var partial = require("vdom-thunk");
 function App() {
     var state = hg.state({
         authorizationDone: hg.value(false),
-        authorizationComponent: AuthorizationComponent(),
-        todoComponent: TodoComponent('test'),
-        todoComponent2: TodoComponent('test2'),
-        listItemsComponent: ListItemsComponent('test3'),
-        listItemsComponent2: ListItemsComponent('test4')
+        authorizationComponent: AuthorizationComponent()
     });
 
     AuthorizationComponent.onSuccessLogin(state.authorizationComponent, onSuccess);
@@ -34,21 +30,39 @@ function App() {
     function onSuccess(opts) {
         state.authorizationDone.set(true);
         if (opts.type === 'login') {
-            state.todoComponent = TodoComponent(opts.user.email);
-            state.listItemsComponent = ListItemsComponent(opts.user.email + '1list');
-            state.todoComponent2 = TodoComponent(opts.user.email + '2');
-            state.listItemsComponent2 = ListItemsComponent(opts.user.email + '2list');
+            document.body.innerHTML = '';
+            hg.app(document.body, AppAuthDone(opts), AppAuthDone.render);
         }
     }
 }
 
-function renderMainView(state) {
-    return state.authorizationDone ?
-        TodoComponent.render(state.todoComponent, state.todoComponent2, state.listItemsComponent, state.listItemsComponent2) :
-        AuthorizationComponent.render(state.authorizationComponent);
+function AppAuthDone(opts) {
+    var state = hg.state({
+        todoComponent: TodoComponent(opts.user.email),
+        todoComponent2: TodoComponent(opts.user.email + '2'),
+        listItemsComponent: ListItemsComponent(opts.user.email + '1list'),
+        listItemsComponent2: ListItemsComponent(opts.user.email + 'list2')
+    });
+    return state;
 }
 
-App.render = function render(state, route) {
+AppAuthDone.render = function(state) {
+    return h('div', [
+        h('link', {
+            rel: 'stylesheet',
+            href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+        }),
+        h('link', {
+            rel: 'stylesheet',
+            href: '/mercury/src/app/styles/style.css'
+        }),
+        partial(header),
+        TodoComponent.render(state.todoComponent, state.todoComponent2, state.listItemsComponent, state.listItemsComponent2),
+        partial(footer)
+    ]);
+};
+
+App.render = function render(state) {
 
     return h('div', [
         h('link', {
@@ -60,7 +74,7 @@ App.render = function render(state, route) {
             href: '/mercury/src/app/styles/style.css'
         }),
         partial(header),
-        renderMainView(state, route),
+        AuthorizationComponent.render(state.authorizationComponent),
         partial(footer)
     ]);
 };

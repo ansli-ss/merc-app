@@ -7,14 +7,14 @@ var styles = require('../styles/styles.js');
 var rafListen = require('../../lib/raf-listen.js');
 var localStorage = window.localStorage;
 var partial = require("vdom-thunk");
-var TodoApp = require('./todo-table/todo-app');
+var TodoApp = require('./todo-app/todo-app');
 
 var Router = require('../../lib/router/index');
 
 var routeView = Router.render;
 
 var menu = require('./todo-list/todo-list.js');
-var renderTable = require('./todo-table/todo-table');
+var renderTable = require('./todo-app/todo-table');
 
 module.exports = TodoComponent;
 
@@ -40,6 +40,7 @@ function renderBase() {
 }
 
 TodoComponent.render = function(state, state2, listState, listState2) {
+    console.log('todocomp render');
     return h('div', {}, [
         h('aside.sidebar', {}, [
             partial(menu, state, state2, listState, listState2)
