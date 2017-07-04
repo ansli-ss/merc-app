@@ -30,20 +30,27 @@ function App() {
 
     function onSuccess(opts) {
         state.authorizationDone.set(true);
-        if (opts.type === 'login') {
-            var loggedIn = localStorage.getItem(opts.user.email);
-            var loggedInPass  = JSON.parse(loggedIn);
+
+        if (opts.type === 'register') {
+            localStorage.setItem(opts.user.email, JSON.stringify(opts.user.password));
+            document.body.innerHTML = '';
+            hg.app(document.body, AppAuthDone(opts), AppAuthDone.render);
+            return;
+        }
+
+        var loggedIn = localStorage.getItem(opts.user.email);
+        if (!loggedIn) {
+            alert('Sign up first');
+        } else {
+            var loggedInPass = JSON.parse(loggedIn);
             if (loggedInPass === opts.user.password) {
                 document.body.innerHTML = '';
                 hg.app(document.body, AppAuthDone(opts), AppAuthDone.render);
             } else {
                 alert('Incorrect password!');
             }
-        } else if (opts.type === 'register') {
-            localStorage.setItem(opts.user.email, JSON.stringify(opts.user.password));
-            document.body.innerHTML = '';
-            hg.app(document.body, AppAuthDone(opts), AppAuthDone.render);
         }
+
     }
 }
 
