@@ -2,7 +2,7 @@
 
 var hg = require('../../../../index.js');
 var h = require('../../../../index.js').h;
-var cuid = require('cuid');
+
 var WeakmapEvent = require('../../../lib/weakmap-event.js');
 
 var link = require('../../partials/link.js');
@@ -22,7 +22,7 @@ module.exports = ListItem;
 function ListItem(item) {
     var item = item || {};
     return hg.state({
-        title: hg.value(item.title || 'Title'),
+        title: hg.value(item.title),
         editing: hg.value(item.editing || false),
         channels: {
             startEdit: startEdit,
@@ -55,9 +55,10 @@ function cancelEdit(state) {
     state.editing.set(false);
 }
 
-ListItem.render = function render(state, listState, tableUri) {
+ListItem.render = function render(state, listState, tableUri, defaultListName) {
+    var listName = listState.title || defaultListName;
     return h( 'div', {}, [
-        link(tableUri, listState.title, state.route === tableUri, listState)
+        link(tableUri, listName, state.route === tableUri, listState)
     ])
 
 };

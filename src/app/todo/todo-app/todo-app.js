@@ -11,7 +11,7 @@ var TodoItem = require('./todo-item.js');
 var ListItem = require('../todo-list/todo-list-item.js');
 
 module.exports = TodoApp;
-// opts - initial state
+
 function TodoApp(opts) {
 
     opts = opts || {};

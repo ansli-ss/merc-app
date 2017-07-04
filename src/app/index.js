@@ -38,10 +38,10 @@ function App() {
 
 function AppAuthDone(opts) {
     var state = hg.state({
-        todoComponent: TodoComponent(opts.user.email),
-        todoComponent2: TodoComponent(opts.user.email + '2'),
-        listItemsComponent: ListItemsComponent(opts.user.email + '1list'),
-        listItemsComponent2: ListItemsComponent(opts.user.email + 'list2')
+        todoComponentHome: TodoComponent(opts.user.email + 'home'),
+        todoComponentWork: TodoComponent(opts.user.email + 'work'),
+        listItemsComponentHome: ListItemsComponent(opts.user.email + 'home-list'),
+        listItemsComponentWork: ListItemsComponent(opts.user.email + 'work-list')
     });
     return state;
 }
@@ -57,7 +57,7 @@ AppAuthDone.render = function(state) {
             href: '/mercury/src/app/styles/style.css'
         }),
         partial(header),
-        TodoComponent.render(state.todoComponent, state.todoComponent2, state.listItemsComponent, state.listItemsComponent2),
+        TodoComponent.render(state.todoComponentHome, state.todoComponentWork, state.listItemsComponentHome, state.listItemsComponentWork),
         partial(footer)
     ]);
 };

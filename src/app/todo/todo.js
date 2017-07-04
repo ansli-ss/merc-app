@@ -39,11 +39,10 @@ function renderBase() {
     }, 'Welcome to ToDo list!');
 }
 
-TodoComponent.render = function(state, state2, listState, listState2) {
-    console.log('todocomp render');
+TodoComponent.render = function(homeState, workState, homeListState, workListState) {
     return h('div', {}, [
         h('aside.sidebar', {}, [
-            partial(menu, state, state2, listState, listState2)
+            partial(menu, homeState, workState, homeListState, workListState)
         ]),
         h('main', {
             style: {
@@ -53,10 +52,9 @@ TodoComponent.render = function(state, state2, listState, listState2) {
         }, [
             routeView({
                 '/app': renderBase.bind(this),
-                '/app/table1': renderTable.bind(this, state, listState),
-                '/app/table2': renderTable.bind(this, state2, listState2)
-              //  '/app/table3': renderTable.bind(this, state, 'List 3')
-            }, state)
+                '/app/home-todo': renderTable.bind(this, homeState, homeListState),
+                '/app/work-todo': renderTable.bind(this, workState, workListState)
+            }, homeState)
         ])
     ]);
 };

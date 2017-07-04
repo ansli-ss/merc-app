@@ -18,9 +18,13 @@ module.exports = Login;
 function Login(state, user) {
     resetErrors(state);
     var email = user.email;
+    var password = user.password;
 
     if (!validEmail(email)) {
         return state.emailError.set('Invalid email');
+    }
+    if (!password) {
+        return state.passwordError.set('Enter password!');
     }
 
     onSuccess.broadcast(state, {
