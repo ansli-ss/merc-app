@@ -1,7 +1,7 @@
 'use strict';
 
-var hg = require('../../../../index.js');
-var h = require('../../../../index.js').h;
+var hg = require('mercury');
+var h = require('mercury').h;
 var styles = require('../../styles/styles.js');
 
 var validEmail = require('valid-email');

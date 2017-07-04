@@ -1,6 +1,6 @@
 
-var h = require('../../../index.js').h;
-var hg = require('../../../index.js');
+var h = require('mercury').h;
+var hg = require('mercury');
 var Router = require('../../lib/router/index');
 var FocusHook = require('../../lib/focus-hook.js');
 var ESCAPE = 27;
@@ -16,7 +16,7 @@ function link(uri, text, isSelected, listState) {
             'ev-dblclick': hg.send(listState.channels.startEdit)
         }, text),
         h('input.list-edit', {
-            value: listState.title,
+            value: text,
             name: 'title',
             'ev-focus': listState.editing ? FocusHook() : null,
             'ev-keydown': hg.sendKey(

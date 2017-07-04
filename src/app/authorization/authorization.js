@@ -1,6 +1,6 @@
 'use strict';
 
-var hg = require('../../../index.js');
+var hg = require('mercury');
 
 var Login = require('./login/login-render.js');
 var Register = require('./register/register-render.js');

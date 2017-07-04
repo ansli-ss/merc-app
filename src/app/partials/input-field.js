@@ -1,5 +1,5 @@
 
-var h = require('../../../index.js').h;
+var h = require('mercury').h;
 var styles = require('../styles/styles.js');
 
 module.exports = inputField;

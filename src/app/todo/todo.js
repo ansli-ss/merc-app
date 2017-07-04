@@ -1,6 +1,6 @@
 'use strict';
 
-var h = require('../../../index').h;
+var h = require('mercury').h;
 
 var styles = require('../styles/styles.js');
 
@@ -54,7 +54,7 @@ TodoComponent.render = function(homeState, workState, homeListState, workListSta
                 '/app': renderBase.bind(this),
                 '/app/home-todo': renderTable.bind(this, homeState, homeListState),
                 '/app/work-todo': renderTable.bind(this, workState, workListState)
-            }, homeState)
+            }, workState)
         ])
     ]);
 };

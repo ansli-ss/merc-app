@@ -1,7 +1,7 @@
 
 
-var hg = require('../../../../index.js');
-var h = require('../../../../index.js').h;
+var hg = require('mercury');
+var h = require('mercury').h;
 var styles = require('../../styles/styles.js');
 
 var validEmail = require('valid-email');
@@ -30,7 +30,10 @@ function Register(state, user) {
         return state.passwordError.set('Password too small');
     }
 
-    onSuccess.broadcast(state);
+    onSuccess.broadcast(state, {
+        type: 'register',
+        user: user
+    });
 }
 
 Register.render = function (state) {

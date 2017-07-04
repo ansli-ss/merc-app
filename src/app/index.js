@@ -1,20 +1,21 @@
 'use strict';
 
-var hg = require('../../index');
-var h = require('../../index').h;
+var hg = require('mercury');
+var h = require('mercury').h;
 
 var styles = require('./styles/styles.js');
 
 var AuthorizationComponent = require('./authorization/authorization.js');
 var TodoComponent = require('./todo/todo.js');
 var ListItemsComponent = require('./todo/list-items.js');
-
-var document = require('global/document');
 var window = require('global/window');
+var localStorage = window.localStorage;
+var document = require('global/document');
+
 
 var TimeTravel = require('../../time-travel.js');
 
-var partial = require("vdom-thunk");
+var partial = require('vdom-thunk');
 
 function App() {
     var state = hg.state({
@@ -30,6 +31,16 @@ function App() {
     function onSuccess(opts) {
         state.authorizationDone.set(true);
         if (opts.type === 'login') {
+            var loggedIn = localStorage.getItem(opts.user.email);
+            var loggedInPass  = JSON.parse(loggedIn);
+            if (loggedInPass === opts.user.password) {
+                document.body.innerHTML = '';
+                hg.app(document.body, AppAuthDone(opts), AppAuthDone.render);
+            } else {
+                alert('Incorrect password!');
+            }
+        } else if (opts.type === 'register') {
+            localStorage.setItem(opts.user.email, JSON.stringify(opts.user.password));
             document.body.innerHTML = '';
             hg.app(document.body, AppAuthDone(opts), AppAuthDone.render);
         }
